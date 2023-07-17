@@ -11,7 +11,22 @@ part 'app_pages.gr.dart';
 
 @AutoRouterConfig()
 class AppPages extends _$AppPages {
+  final String prefix = 'alice';
+
+  String _getPrefix() => '${prefix.isNotEmpty ? '/$prefix' : ''}/';
   @override
-  // TODO: implement routes
-  List<AutoRoute> get routes => throw UnimplementedError();
+  List<AutoRoute> get routes => [
+        AutoRoute(
+          path: '${_getPrefix()}/',
+          page: AliceCallsListRoute.page,
+        ),
+        AutoRoute(
+          path: '${_getPrefix()}/call-details',
+          page: AliceCallDetailsRoute.page,
+        ),
+        AutoRoute(
+          path: '${_getPrefix()}/stats',
+          page: AliceStatsRoute.page,
+        ),
+      ];
 }
