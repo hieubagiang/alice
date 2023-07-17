@@ -125,7 +125,14 @@ class AliceCore {
 
   /// Opens Http calls inspector. This will navigate user to the new fullscreen
   /// page where all listened http calls can be viewed.
-  final AliceCoreNavigator navigator;
+  AliceCoreNavigator? navigator;
+  void setNavigator(AliceCoreNavigator navigator) {
+    this.navigator = navigator;
+  }
+
+  AliceCoreNavigator? getNavigator() {
+    return this.navigator;
+  }
 
   String _getNotificationMessage() {
     final List<AliceHttpCall> calls = callsSubject.value;
