@@ -46,7 +46,6 @@ class Alice {
 
   /// Creates alice instance.
   Alice({
-    required AliceCoreNavigator navigator,
     this.showNotification = true,
     this.showInspectorOnShake = false,
     this.darkTheme = false,
@@ -66,6 +65,13 @@ class Alice {
     );
     _httpClientAdapter = AliceHttpClientAdapter(_aliceCore);
     _httpAdapter = AliceHttpAdapter(_aliceCore);
+  }
+  void setNavigator(AliceCoreNavigator navigator) {
+    this._aliceCore.navigator = navigator;
+  }
+
+  AliceCoreNavigator? getNavigator() {
+    return this._aliceCore.navigator;
   }
 
   /// Get Dio interceptor which should be applied to Dio instance.

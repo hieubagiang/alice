@@ -37,12 +37,12 @@ class _MyAppState extends State<MyApp> with AliceCoreNavigator {
   @override
   void initState() {
     _alice = Alice(
-      navigator: this,
       showNotification: true,
       showInspectorOnShake: true,
       darkTheme: false,
       maxCallsCount: 1000,
     );
+
     _dio = Dio(BaseOptions(
       followRedirects: false,
     ));
