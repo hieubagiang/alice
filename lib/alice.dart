@@ -56,7 +56,6 @@ class Alice {
     this.showShareButton = true,
   }) {
     _aliceCore = AliceCore(
-      navigator,
       showNotification: showNotification,
       showInspectorOnShake: showInspectorOnShake,
       darkTheme: darkTheme,

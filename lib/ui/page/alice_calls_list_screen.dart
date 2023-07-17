@@ -416,7 +416,7 @@ class _AliceCallsListScreenState extends State<AliceCallsListScreen>
 
   void _onListItemClicked(AliceHttpCall call) {
     widget._aliceCore.navigator
-        .navigateToCallDetailsScreen(call, widget._aliceCore);
+        ?.navigateToCallDetailsScreen(call, widget._aliceCore);
   }
 
   void _showRemoveDialog() {
@@ -436,7 +436,7 @@ class _AliceCallsListScreenState extends State<AliceCallsListScreen>
   }
 
   void _showStatsScreen() {
-    aliceCore.navigator.navigateToStatsScreen(aliceCore);
+    aliceCore.navigator?.navigateToStatsScreen(aliceCore);
   }
 
   void _saveToFile() async {

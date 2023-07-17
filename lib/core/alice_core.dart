@@ -55,8 +55,7 @@ class AliceCore {
   bool _notificationProcessing = false;
 
   /// Creates alice core instance
-  AliceCore(
-    this.navigator, {
+  AliceCore({
     required this.showNotification,
     required this.showInspectorOnShake,
     required this.darkTheme,
@@ -306,6 +305,6 @@ class AliceCore {
   }
 
   void navigateToCallListScreen() {
-    navigator.navigateToCallListScreen(this, _aliceLogger);
+    navigator?.navigateToCallListScreen(this, _aliceLogger);
   }
 }
