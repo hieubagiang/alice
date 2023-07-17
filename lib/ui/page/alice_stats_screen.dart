@@ -2,8 +2,10 @@ import 'package:alice/core/alice_core.dart';
 import 'package:alice/helper/alice_conversion_helper.dart';
 import 'package:alice/model/alice_http_call.dart';
 import 'package:alice/utils/alice_constants.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+@RoutePage()
 class AliceStatsScreen extends StatelessWidget {
   final AliceCore aliceCore;
 

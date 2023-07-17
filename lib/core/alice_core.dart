@@ -7,7 +7,7 @@ import 'package:alice/model/alice_http_call.dart';
 import 'package:alice/model/alice_http_error.dart';
 import 'package:alice/model/alice_http_response.dart';
 import 'package:alice/model/alice_log.dart';
-import 'package:alice/ui/page/alice_calls_list_screen.dart';
+import 'package:alice/routes/navigator.dart';
 import 'package:alice/utils/shake_detector.dart';
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';
@@ -46,7 +46,6 @@ class AliceCore {
   final AliceLogger _aliceLogger = AliceLogger();
 
   late FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
-  GlobalKey<NavigatorState>? navigatorKey;
   Brightness _brightness = Brightness.light;
   bool _isInspectorOpened = false;
   ShakeDetector? _shakeDetector;
@@ -57,7 +56,7 @@ class AliceCore {
 
   /// Creates alice core instance
   AliceCore(
-    this.navigatorKey, {
+    this.navigator, {
     required this.showNotification,
     required this.showInspectorOnShake,
     required this.darkTheme,
@@ -126,27 +125,7 @@ class AliceCore {
 
   /// Opens Http calls inspector. This will navigate user to the new fullscreen
   /// page where all listened http calls can be viewed.
-  void navigateToCallListScreen() {
-    final context = getContext();
-    if (context == null) {
-      AliceUtils.log(
-        "Cant start Alice HTTP Inspector. Please add NavigatorKey to your application",
-      );
-      return;
-    }
-    if (!_isInspectorOpened) {
-      _isInspectorOpened = true;
-      Navigator.push<void>(
-        context,
-        MaterialPageRoute(
-          builder: (context) => AliceCallsListScreen(this, _aliceLogger),
-        ),
-      ).then((onValue) => _isInspectorOpened = false);
-    }
-  }
-
-  /// Get context from navigator key. Used to open inspector route.
-  BuildContext? getContext() => navigatorKey?.currentState?.overlay?.context;
+  final AliceCoreNavigator navigator;
 
   String _getNotificationMessage() {
     final List<AliceHttpCall> calls = callsSubject.value;
@@ -317,5 +296,9 @@ class AliceCore {
   /// Adds list of logs to Alice logger
   void addLogs(List<AliceLog> logs) {
     _aliceLogger.logs.addAll(logs);
+  }
+
+  void navigateToCallListScreen() {
+    navigator.navigateToCallListScreen(this, _aliceLogger);
   }
 }

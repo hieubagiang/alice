@@ -5,15 +5,14 @@ import 'package:alice/model/alice_http_call.dart';
 import 'package:alice/model/alice_menu_item.dart';
 import 'package:alice/model/alice_sort_option.dart';
 import 'package:alice/model/alice_tab_item.dart';
-import 'package:alice/ui/page/alice_call_details_screen.dart';
 import 'package:alice/ui/widget/alice_call_list_item_widget.dart';
 import 'package:alice/ui/widget/alice_log_list_widget.dart';
 import 'package:alice/ui/widget/alice_raw_log_list_widger.dart';
 import 'package:alice/utils/alice_constants.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import 'alice_stats_screen.dart';
-
+@RoutePage()
 class AliceCallsListScreen extends StatefulWidget {
   final AliceCore _aliceCore;
   final AliceLogger? _aliceLogger;
@@ -416,12 +415,8 @@ class _AliceCallsListScreenState extends State<AliceCallsListScreen>
   }
 
   void _onListItemClicked(AliceHttpCall call) {
-    Navigator.push<void>(
-      widget._aliceCore.getContext()!,
-      MaterialPageRoute(
-        builder: (context) => AliceCallDetailsScreen(call, widget._aliceCore),
-      ),
-    );
+    widget._aliceCore.navigator
+        .navigateToCallDetailsScreen(call, widget._aliceCore);
   }
 
   void _showRemoveDialog() {
@@ -441,12 +436,7 @@ class _AliceCallsListScreenState extends State<AliceCallsListScreen>
   }
 
   void _showStatsScreen() {
-    Navigator.push<void>(
-      aliceCore.getContext()!,
-      MaterialPageRoute(
-        builder: (context) => AliceStatsScreen(widget._aliceCore),
-      ),
-    );
+    aliceCore.navigator.navigateToStatsScreen(aliceCore);
   }
 
   void _saveToFile() async {

@@ -2,14 +2,20 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:alice/alice.dart';
+import 'package:alice/core/alice_core.dart';
 import 'package:alice/core/alice_http_client_extensions.dart';
 import 'package:alice/core/alice_http_extensions.dart';
+import 'package:alice/core/alice_logger.dart';
+import 'package:alice/model/alice_http_call.dart';
+import 'package:alice/routes/navigator.dart';
 import 'package:alice_example/posts_service.dart';
 import 'package:chopper/chopper.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
+
+import 'posts_service.dart';
 
 void main() => runApp(MyApp());
 
@@ -18,7 +24,7 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> with AliceCoreNavigator {
   late Alice _alice;
   late Dio _dio;
   late HttpClient _httpClient;
@@ -31,6 +37,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     _alice = Alice(
+      navigator: this,
       showNotification: true,
       showInspectorOnShake: true,
       darkTheme: false,
@@ -58,7 +65,6 @@ class _MyAppState extends State<MyApp> {
         primaryColor: _primaryColor,
         colorScheme: ColorScheme.light(secondary: _accentColor),
       ),
-      navigatorKey: _alice.getNavigatorKey(),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
@@ -388,5 +394,20 @@ class _MyAppState extends State<MyApp> {
 
   void _runHttpInspector() {
     _alice.showInspector();
+  }
+
+  @override
+  void navigateToCallDetailsScreen(AliceHttpCall call, AliceCore core) {
+    // TODO: implement navigateToCallDetailsScreen
+  }
+
+  @override
+  void navigateToCallListScreen(AliceCore core, AliceLogger? logger) {
+    // TODO: implement navigateToCallListScreen
+  }
+
+  @override
+  void navigateToStatsScreen(AliceCore core) {
+    // TODO: implement navigateToStatsScreen
   }
 }

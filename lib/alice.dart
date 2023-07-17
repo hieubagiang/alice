@@ -7,6 +7,7 @@ import 'package:alice/core/alice_http_adapter.dart';
 import 'package:alice/core/alice_http_client_adapter.dart';
 import 'package:alice/model/alice_http_call.dart';
 import 'package:alice/model/alice_log.dart';
+import 'package:alice/routes/navigator.dart';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -39,14 +40,13 @@ class Alice {
   ///Flag used to show/hide share button
   final bool? showShareButton;
 
-  GlobalKey<NavigatorState>? _navigatorKey;
   late AliceCore _aliceCore;
   late AliceHttpClientAdapter _httpClientAdapter;
   late AliceHttpAdapter _httpAdapter;
 
   /// Creates alice instance.
   Alice({
-    GlobalKey<NavigatorState>? navigatorKey,
+    required AliceCoreNavigator navigator,
     this.showNotification = true,
     this.showInspectorOnShake = false,
     this.darkTheme = false,
@@ -55,9 +55,8 @@ class Alice {
     this.directionality,
     this.showShareButton = true,
   }) {
-    _navigatorKey = navigatorKey ?? GlobalKey<NavigatorState>();
     _aliceCore = AliceCore(
-      _navigatorKey,
+      navigator,
       showNotification: showNotification,
       showInspectorOnShake: showInspectorOnShake,
       darkTheme: darkTheme,
@@ -68,17 +67,6 @@ class Alice {
     );
     _httpClientAdapter = AliceHttpClientAdapter(_aliceCore);
     _httpAdapter = AliceHttpAdapter(_aliceCore);
-  }
-
-  /// Set custom navigation key. This will help if there's route library.
-  void setNavigatorKey(GlobalKey<NavigatorState> navigatorKey) {
-    _navigatorKey = navigatorKey;
-    _aliceCore.navigatorKey = navigatorKey;
-  }
-
-  /// Get currently used navigation key
-  GlobalKey<NavigatorState>? getNavigatorKey() {
-    return _navigatorKey;
   }
 
   /// Get Dio interceptor which should be applied to Dio instance.
