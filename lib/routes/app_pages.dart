@@ -4,6 +4,7 @@ import 'package:alice/ui/page/alice_call_details_screen.dart';
 import 'package:alice/ui/page/alice_calls_list_screen.dart';
 import 'package:alice/ui/page/alice_stats_screen.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
 
 import '../core/alice_core.dart';
 
@@ -12,6 +13,8 @@ part 'app_pages.gr.dart';
 @AutoRouterConfig()
 class AppPages extends _$AppPages {
   final String prefix = 'alice';
+  @override
+  RouteType get defaultRouteType => const RouteType.material();
 
   String _getPrefix() => '${prefix.isNotEmpty ? '/$prefix' : ''}/';
   @override

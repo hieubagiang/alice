@@ -10,21 +10,10 @@
 part of 'app_pages.dart';
 
 abstract class _$AppPages extends RootStackRouter {
-  // ignore: unused_element
-  _$AppPages({super.navigatorKey});
+  _$AppPages([GlobalKey<NavigatorState>? navigatorKey]) : super(navigatorKey);
 
   @override
   final Map<String, PageFactory> pagesMap = {
-    AliceCallsListRoute.name: (routeData) {
-      final args = routeData.argsAs<AliceCallsListRouteArgs>();
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: AliceCallsListScreen(
-          args.aliceCore,
-          args.aliceLogger,
-        ),
-      );
-    },
     AliceCallDetailsRoute.name: (routeData) {
       final args = routeData.argsAs<AliceCallDetailsRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -32,6 +21,16 @@ abstract class _$AppPages extends RootStackRouter {
         child: AliceCallDetailsScreen(
           args.call,
           args.core,
+        ),
+      );
+    },
+    AliceCallsListRoute.name: (routeData) {
+      final args = routeData.argsAs<AliceCallsListRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: AliceCallsListScreen(
+          args.aliceCore,
+          args.aliceLogger,
         ),
       );
     },
@@ -43,44 +42,6 @@ abstract class _$AppPages extends RootStackRouter {
       );
     },
   };
-}
-
-/// generated route for
-/// [AliceCallsListScreen]
-class AliceCallsListRoute extends PageRouteInfo<AliceCallsListRouteArgs> {
-  AliceCallsListRoute({
-    required AliceCore aliceCore,
-    required AliceLogger? aliceLogger,
-    List<PageRouteInfo>? children,
-  }) : super(
-          AliceCallsListRoute.name,
-          args: AliceCallsListRouteArgs(
-            aliceCore: aliceCore,
-            aliceLogger: aliceLogger,
-          ),
-          initialChildren: children,
-        );
-
-  static const String name = 'AliceCallsListRoute';
-
-  static const PageInfo<AliceCallsListRouteArgs> page =
-      PageInfo<AliceCallsListRouteArgs>(name);
-}
-
-class AliceCallsListRouteArgs {
-  const AliceCallsListRouteArgs({
-    required this.aliceCore,
-    required this.aliceLogger,
-  });
-
-  final AliceCore aliceCore;
-
-  final AliceLogger? aliceLogger;
-
-  @override
-  String toString() {
-    return 'AliceCallsListRouteArgs{aliceCore: $aliceCore, aliceLogger: $aliceLogger}';
-  }
 }
 
 /// generated route for
@@ -118,6 +79,44 @@ class AliceCallDetailsRouteArgs {
   @override
   String toString() {
     return 'AliceCallDetailsRouteArgs{call: $call, core: $core}';
+  }
+}
+
+/// generated route for
+/// [AliceCallsListScreen]
+class AliceCallsListRoute extends PageRouteInfo<AliceCallsListRouteArgs> {
+  AliceCallsListRoute({
+    required AliceCore aliceCore,
+    required AliceLogger? aliceLogger,
+    List<PageRouteInfo>? children,
+  }) : super(
+          AliceCallsListRoute.name,
+          args: AliceCallsListRouteArgs(
+            aliceCore: aliceCore,
+            aliceLogger: aliceLogger,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'AliceCallsListRoute';
+
+  static const PageInfo<AliceCallsListRouteArgs> page =
+      PageInfo<AliceCallsListRouteArgs>(name);
+}
+
+class AliceCallsListRouteArgs {
+  const AliceCallsListRouteArgs({
+    required this.aliceCore,
+    required this.aliceLogger,
+  });
+
+  final AliceCore aliceCore;
+
+  final AliceLogger? aliceLogger;
+
+  @override
+  String toString() {
+    return 'AliceCallsListRouteArgs{aliceCore: $aliceCore, aliceLogger: $aliceLogger}';
   }
 }
 
