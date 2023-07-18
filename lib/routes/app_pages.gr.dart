@@ -9,8 +9,9 @@
 
 part of 'app_pages.dart';
 
-abstract class _$AppPages extends RootStackRouter {
-  _$AppPages([GlobalKey<NavigatorState>? navigatorKey]) : super(navigatorKey);
+abstract class _$AliceAppPages extends RootStackRouter {
+  _$AliceAppPages([GlobalKey<NavigatorState>? navigatorKey])
+      : super(navigatorKey);
 
   @override
   final Map<String, PageFactory> pagesMap = {
