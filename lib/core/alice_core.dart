@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:alice/core/alice_logger.dart';
 import 'package:alice/core/alice_utils.dart';
 import 'package:alice/helper/alice_save_helper.dart';
+import 'package:alice/helper/debounce.dart';
 import 'package:alice/model/alice_http_call.dart';
 import 'package:alice/model/alice_http_error.dart';
 import 'package:alice/model/alice_http_response.dart';
@@ -53,6 +54,7 @@ class AliceCore {
   String? _notificationMessage;
   String? _notificationMessageShown;
   bool _notificationProcessing = false;
+  final _debouncer = Debouncer(delay: const Duration(milliseconds: 500));
 
   /// Creates alice core instance
   AliceCore({
@@ -305,7 +307,9 @@ class AliceCore {
   }
 
   void navigateToCallListScreen() {
-    navigator?.navigateToCallListScreen(this, _aliceLogger);
+    _debouncer.run(() {
+      navigator?.navigateToCallListScreen(this, _aliceLogger);
+    });
   }
 
   AliceLogger get aliceLogger => _aliceLogger;
