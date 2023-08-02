@@ -307,4 +307,6 @@ class AliceCore {
   void navigateToCallListScreen() {
     navigator?.navigateToCallListScreen(this, _aliceLogger);
   }
+
+  AliceLogger get aliceLogger => _aliceLogger;
 }
