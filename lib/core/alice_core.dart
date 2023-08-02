@@ -47,7 +47,6 @@ class AliceCore {
 
   late FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
   Brightness _brightness = Brightness.light;
-  bool _isInspectorOpened = false;
   ShakeDetector? _shakeDetector;
   StreamSubscription? _callsSubscription;
   String? _notificationMessage;
