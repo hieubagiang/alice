@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:alice/core/alice_logger.dart';
 import 'package:alice/core/alice_utils.dart';
@@ -219,7 +220,7 @@ class AliceCore {
       "Alice (total: ${callsSubject.value.length} requests)",
       message,
       platformChannelSpecifics,
-      payload: "",
+      payload: jsonEncode({'action': 'open_alice'}),
     );
     _notificationMessageShown = message;
     _notificationProcessing = false;
