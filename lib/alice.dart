@@ -5,7 +5,6 @@ import 'package:alice/core/alice_core.dart';
 import 'package:alice/core/alice_dio_interceptor.dart';
 import 'package:alice/core/alice_http_adapter.dart';
 import 'package:alice/core/alice_http_client_adapter.dart';
-import 'package:alice/core/alice_logger.dart';
 import 'package:alice/model/alice_http_call.dart';
 import 'package:alice/model/alice_log.dart';
 import 'package:alice/routes/navigator.dart';
@@ -127,5 +126,5 @@ class Alice {
     _aliceCore.addLogs(logs);
   }
 
-  AliceLogger get aliceLogger => _aliceCore.aliceLogger;
+  AliceCore get aliceCore => _aliceCore;
 }
